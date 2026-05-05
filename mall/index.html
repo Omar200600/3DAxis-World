@@ -6,7 +6,6 @@
     <title>3D Axis - المول التجاري الذكي</title>
     <style>
         body { font-family: sans-serif; background-color: #f4f4f9; text-align: center; padding: 20px; }
-        /* وعاء الأفاتار البائع */
         #avatar-container { 
             width: 100%; height: 350px; 
             background: linear-gradient(180deg, #ffffff 0%, #e8f0fe 100%);
@@ -25,33 +24,17 @@
     </style>
 </head>
 <body>
-
-    <!-- 1. مكان الأفاتار (البائع أو المساعد الافتراضي) -->
     <div id="avatar-container"></div>
-
     <h1>مرحباً بك في مول 3D Axis التجاري</h1>
-
-    <!-- 2. لوحة المستأجرين الجدد (العقد التجاري) -->
     <div class="mall-panel">
         <h3>قسم المستأجرين والشركات</h3>
         <p>هل ترغب في فتح متجرك الخاص في عالمنا الافتراضي؟</p>
-        
-        <!-- الزر الذي يفتح لوحة العقود والأسعار -->
         <button class="rent-btn" onclick="openContract()">إضغط هنا للاستئجار (عقد تجاري رسمي)</button>
     </div>
-
-    <br><br>
-    <a href="../index.html" style="text-decoration: none; color: #666;">← العودة للساحة الرئيسية</a>
-
     <script>
         function openContract() {
-            // سيتم ربط هذه الدالة لاحقاً بملف التسعير والعقود الذكي
             alert("ستظهر الآن لوحة بأسماء الأدوار وأنواع المتاجر وفئاتها... هذا يعتبر عقداً رسمياً.");
         }
     </script>
-
-    <!-- 3. ربط المحرك الذكي (الأوركسترا) لبرمجة الأفاتار -->
-    <script type="module" src="../ai-orchestrator.js"></script>
-
 </body>
 </html>
