@@ -2,19 +2,56 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>3D Axis - السوق الذكي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Axis - المول التجاري الذكي</title>
     <style>
-        body { font-family: sans-serif; background-color: #fff0f5; text-align: center; padding: 50px; }
-        .shop-panel { border: 2px solid #ff1493; padding: 20px; border-radius: 15px; background: white; }
+        body { font-family: sans-serif; background-color: #f4f4f9; text-align: center; padding: 20px; }
+        /* وعاء الأفاتار البائع */
+        #avatar-container { 
+            width: 100%; height: 350px; 
+            background: linear-gradient(180deg, #ffffff 0%, #e8f0fe 100%);
+            border-radius: 20px; margin-bottom: 20px;
+        }
+        .mall-panel { 
+            border: 2px solid #28a745; padding: 25px; 
+            border-radius: 15px; background: white; 
+            display: inline-block; width: 90%; max-width: 600px;
+        }
+        .rent-btn { 
+            background-color: #28a745; color: white; padding: 15px 30px; 
+            border: none; border-radius: 8px; cursor: pointer; font-size: 18px; 
+        }
+        .rent-btn:hover { background-color: #218838; }
     </style>
 </head>
 <body>
-    <h1>مرحباً بك في المول التجاري الافتراضي</h1>
-    <div class="shop-panel">
-        <p>هنا يمكنك استئجار المحلات التجارية وعرض منتجاتك للعالم.</p>
-        <button onclick="alert('لوحة المتاجر ستفتح قريباً للدفع والتسجيل!')">استئجار محل الآن</button>
+
+    <!-- 1. مكان الأفاتار (البائع أو المساعد الافتراضي) -->
+    <div id="avatar-container"></div>
+
+    <h1>مرحباً بك في مول 3D Axis التجاري</h1>
+
+    <!-- 2. لوحة المستأجرين الجدد (العقد التجاري) -->
+    <div class="mall-panel">
+        <h3>قسم المستأجرين والشركات</h3>
+        <p>هل ترغب في فتح متجرك الخاص في عالمنا الافتراضي؟</p>
+        
+        <!-- الزر الذي يفتح لوحة العقود والأسعار -->
+        <button class="rent-btn" onclick="openContract()">إضغط هنا للاستئجار (عقد تجاري رسمي)</button>
     </div>
-    <br>
-    <a href="../index.html">العودة للساحة الرئيسية</a>
+
+    <br><br>
+    <a href="../index.html" style="text-decoration: none; color: #666;">← العودة للساحة الرئيسية</a>
+
+    <script>
+        function openContract() {
+            // سيتم ربط هذه الدالة لاحقاً بملف التسعير والعقود الذكي
+            alert("ستظهر الآن لوحة بأسماء الأدوار وأنواع المتاجر وفئاتها... هذا يعتبر عقداً رسمياً.");
+        }
+    </script>
+
+    <!-- 3. ربط المحرك الذكي (الأوركسترا) لبرمجة الأفاتار -->
+    <script type="module" src="../ai-orchestrator.js"></script>
+
 </body>
 </html>
