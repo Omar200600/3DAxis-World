@@ -3,59 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Axis - المدينة الذكية</title>
+    <title>3D Axis - المعاينة الحية</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #eef2f7;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
+        body { margin: 0; overflow: hidden; background-color: #000; }
+        #loading-screen {
+            position: absolute; width: 100%; height: 100%;
+            background: #222; color: white; display: flex;
+            align-items: center; justify-content: center; z-index: 99;
         }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        h1 { color: #333; }
-        .btn-group { margin-top: 30px; }
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: transform 0.2s;
-        }
-        .btn-school { background-color: #007bff; }
-        .btn-mall { background-color: #ff1493; }
-        .btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>مرحباً بك في مدينة 3D Axis الذكية</h1>
-        <p>بوابتك إلى مستقبل التجارة والتعليم في الميتافيرس</p>
+    <div id="loading-screen">جاري تحميل مدينة 3D Axis... انتظر قليلاً</div>
 
-        <div class="btn-group">
-            <!-- رابط الدخول للمدرسة -->
-            <a href="school/index.html" class="btn btn-school">دخول المدرسة الذكية</a>
-            
-            <!-- رابط الدخول للمول -->
-            <a href="mall/index.html" class="btn btn-mall">دخول السوق التجاري</a>
-        </div>
-    </div>
+    <!-- استدعاء مكتبة Three.js من سيرفر خارجي لضمان السرعة على جهازك -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
 
-    <!-- ربط كود الذكاء الموزع للمشروع -->
-    <script src="ai-orchestrator.js"></script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // إضاءة قوية للقاعة
+        const light = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(light);
+
+        const loader = new GLTFLoader();
+
+        // 1. تحميل القاعة التعليمية (classroom.glb)
+        loader.load('classroom.glb', (gltf) => {
+            scene.add(gltf.scene);
+            document.getElementById('loading-screen').style.display = 'none';
+        }, undefined, (error) => {
+            console.error('خطأ في تحميل القاعة:', error);
+        });
+
+        // 2. تحميل الأفاتار (walk.glb)
+        loader.load('walk.glb', (gltf) => {
+            const avatar = gltf.scene;
+            avatar.position.set(0, 0, -2); // وضعه أمام الكاميرا
+            scene.add(avatar);
+        });
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
 </body>
 </html>
