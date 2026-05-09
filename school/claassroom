@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Axis - Smart Classroom Template</title>
+    <!-- Using A-Frame for high performance on browsers and mobile -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- Asset Management for Project Organization -->
+        <a-assets>
+            <img id="wall-texture" src="https://example.com/brushed-metal.jpg">
+            <a-mixin id="hologram-glow" material="color: #00ffff; opacity: 0.6; transparent: true; emissive: #00ffff"></a-mixin>
+            <a-mixin id="gold-frame" material="color: #d4af37; metalness: 0.8; roughness: 0.2"></a-mixin>
+        </a-assets>
+
+        <!-- Classroom Structure -->
+        <!-- Metallic Walls -->
+        <a-cylinder radius="10" height="4" side="double" open-ended="true" theta-start="0" theta-length="270"
+                    material="color: #888; metalness: 0.9; roughness: 0.3" position="0 2 0"></a-cylinder>
+        
+        <!-- Glass Partitions -->
+        <a-cylinder radius="9.8" height="3" side="double" open-ended="true" theta-start="270" theta-length="90"
+                    material="color: #add8e6; opacity: 0.3; transparent: true" position="0 1.5 0"></a-cylinder>
+
+        <!-- Flooring -->
+        <a-circle radius="10" rotation="-90 0 0" material="color: #444; metalness: 0.5"></a-circle>
+
+        <!-- Main AI Smart Board -->
+        <a-plane position="0 2.2 -9.8" width="8" height="4" color="#000">
+            <a-text value="Artificial Intelligence and Futurist Design" align="center" position="0 1.5 0.1" width="6" color="#00ffff"></a-text>
+            <a-plane width="7.5" height="3" position="0 -0.2 0.05" material="src: #ui-display-image; color: #111"></a-plane>
+        </a-plane>
+
+        <!-- Central Hologram Pedestal -->
+        <a-box position="0 0.5 0" width="1.5" height="1" depth="1.5" material="color: #222; metalness: 1">
+            <a-cone position="0 1.5 0" radius-bottom="0.5" radius-top="0.1" mixin="hologram-glow" animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-cone>
+        </a-box>
+
+        <!-- Example Student Station Pod (Repeatable) -->
+        <a-entity position="4 0 4" rotation="0 -45 0">
+            <!-- Desk -->
+            <a-box position="0 0.7 0" width="2" height="0.1" depth="1" material="color: #333"></a-box>
+            <!-- Futurist Chair -->
+            <a-entity position="0 0 1.5">
+                <a-cone radius-bottom="0.4" height="0.8" mixin="gold-frame"></a-cone>
+                <a-box position="0 1 0" width="0.6" height="0.8" depth="0.1" mixin="gold-frame"></a-box>
+            </a-entity>
+            <!-- Holographic Screen -->
+            <a-plane position="0 1.2 -0.4" width="1.5" height="0.8" mixin="hologram-glow" rotation="-10 0 0">
+                <a-text value="Student ID: 091-AI" align="center" width="2"></a-text>
+            </a-plane>
+        </a-entity>
+
+        <!-- Lighting Environment -->
+        <a-light type="ambient" color="#fff" intensity="0.6"></a-light>
+        <a-light type="point" intensity="1" position="0 5 0" color="#00ffff"></a-light>
+
+        <!-- Camera Rig for User Control -->
+        <a-entity id="rig" position="0 1.6 8">
+            <a-camera look-controls wasd-controls></a-camera>
+        </a-entity>
+    </a-scene>
+</body>
+</html>
