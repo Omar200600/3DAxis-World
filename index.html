@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-    <title>3D Axis Test</title>
-    <style>body { margin: 0; background: #111; color: white; text-align: center; font-family: sans-serif; }</style>
+    <meta charset="UTF-8">
+    <title>3D Amasis | تسجيل التعليم الموازي</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            overflow: hidden; background: #050a18; 
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* حاوية الخلفية المتحركة */
+        .background-scene {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            /* تم تعديل الاسم ليطابق ملفك الحالي image_6.png.jpeg */
+            background-image: url('image_6.png.jpeg'); 
+            background-size: cover; background-position: center;
+            animation: zoom3D 25s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes zoom3D {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) translate(10px, -10px); }
+        }
+
+        .overlay {
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; height: 100%; background: rgba(0,0,0,0.4);
+        }
+
+        .glow-title {
+            position: absolute; top: 40px; font-size: 30px; font-weight: bold;
+            color: #00d4ff; text-shadow: 0 0 15px #00d4ff; text-align: center; width: 100%;
+        }
+
+        /* زر التسجيل REGISTER */
+        .register-btn {
+            padding: 25px 60px; font-size: 26px; font-weight: bold;
+            color: #fff; background: rgba(0, 212, 255, 0.1);
+            border: 3px solid #00d4ff; border-radius: 60px;
+            cursor: pointer; backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px #00d4ff; transition: 0.5s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px #00d4ff; }
+            50% { box-shadow: 0 0 35px #00d4ff; }
+        }
+
+        .register-btn:hover { background: #00d4ff; color: #000; transform: scale(1.1); }
+
+        /* لوحة البيانات */
+        #data-panel {
+            display: none; width: 420px; padding: 30px;
+            background: rgba(10, 15, 30, 0.95); border-radius: 20px;
+            border: 2px solid #00d4ff; flex-direction: column; gap: 15px;
+            backdrop-filter: blur(15px);
+        }
+
+        .close-btn { color: #ff4b4b; cursor: pointer; text-align: left; font-weight: bold; }
+
+        input, select {
+            width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
+            border: 1px solid #333; border-radius: 8px; color: white; outline: none;
+        }
+
+        .submit-btn {
+            background: #00d4ff; color: #000; padding: 15px; border: none;
+            border-radius: 10px; font-weight: bold; cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h2>جاري تشغيل عالم 3D Axis...</h2>
-    <p>إذا ظهرت هذه الرسالة، فالموقع بدأ يعمل بنجاح!</p>
-    
-    <script type="module">
-        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-        console.log("Three.js Loaded!");
-        // سيتم إضافة تحميل الملفات هنا غداً بعد التأكد من اللون الأخضر
+
+    <div class="background-scene"></div>
+    <div class="glow-title">3D Amasis / ثري دي امسيس</div>
+
+    <div class="overlay">
+        <button class="register-btn" id="main-btn" onclick="openForm()">
+            تسجيل | REGISTER
+        </button>
+
+        <div id="data-panel">
+            <div class="close-btn" onclick="closeForm()">X إغلاق</div>
+            <h2 style="text-align:center; color:#00d4ff;">تسجيل التعليم الموازي</h2>
+            <div style="display:flex; gap:10px;">
+                <select><option>الدولة</option></select>
+                <select><option>المحافظة</option></select>
+            </div>
+            <select><option>نوع الحساب (طالب/معلم)</option></select>
+            <input type="text" placeholder="الاسم الكامل">
+            <input type="email" placeholder="البريد الإلكتروني">
+            <input type="tel" placeholder="رقم الهاتف">
+            <button class="submit-btn">إرسال البيانات</button>
+        </div>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById('data-panel').style.display = 'flex';
+            document.getElementById('main-btn').style.display = 'none';
+        }
+        function closeForm() {
+            document.getElementById('data-panel').style.display = 'none';
+            document.getElementById('main-btn').style.display = 'block';
+        }
     </script>
 </body>
 </html>
