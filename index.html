@@ -160,7 +160,7 @@
             box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
-        /* منطقة الرفع المشعة ثلاثية الأبعاد */
+        /* منطقة الرفع المشعة ثلاثية الأبعاد المعدلة */
         .upload-box {
             border: 2px dashed rgba(0, 242, 254, 0.5);
             background: rgba(0, 242, 254, 0.03);
@@ -169,13 +169,14 @@
             text-align: center;
             cursor: pointer;
             box-shadow: inset 0 0 20px rgba(0,242,254,0.05);
+            transition: all 0.3s ease;
         }
 
         .upload-box:hover {
             border-color: var(--neon-cyan);
             background: rgba(0, 242, 254, 0.08);
             box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-            transform: scale(1.01) translateZ(10px);
+            transform: scale(1.01);
         }
 
         .upload-box i {
@@ -183,6 +184,37 @@
             color: var(--neon-cyan);
             margin-bottom: 15px;
             text-shadow: var(--text-glow);
+        }
+
+        .upload-box__input {
+            display: none; /* إخفاء الإدخال الافتراضي لتفعيل الضغط المخصص */
+        }
+
+        .upload-box--over {
+            border-style: solid;
+            background-color: rgba(0, 242, 254, 0.15);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+        }
+
+        /* قائمة استعراض الصور المحددة الذكية */
+        .file-list {
+            margin-top: 15px;
+            text-align: right;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .file-item {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* زر الإرسال الرئيسي المتوهج والمشع */
@@ -203,6 +235,7 @@
             box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
             text-decoration: none;
             text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
         .btn-cyber:hover {
@@ -373,11 +406,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>صورة الأرض الحالية (المستهدفة بالتحليل)</label>
+                    <label>صورة الأرض الحالية (المستهدفة بالتحليل - يمكنك اختيار عدة صور معاً)</label>
                     <div class="upload-box" id="uploadBox">
                         <i class="fa-solid fa-qrcode"></i>
-                        <p style="color: #fff; font-weight: bold;">اسحب وأفلت صورة الأرض هنا أو اضغط للتصفح السحابي</p>
+                        <p style="color: #fff; font-weight: bold;" id="uploadPrompt">اسحب وأفلت صور الأرض هنا أو اضغط للتصفح السحابي المتعدد</p>
+                        <input type="file" id="fileInput" class="upload-box__input" multiple accept="image/*">
                     </div>
+                    <div id="fileList" class="file-list"></div>
                 </div>
 
                 <div class="form-group">
@@ -385,10 +420,10 @@
                     <textarea rows="4" placeholder="مثال: تصميم مودرن بواجهة زجاجية، 12 طابق، محلات تجارية بالطابق الأرضي مع مواقف ذكية للسيارات..."></textarea>
                 </div>
 
-                <a href="modules/generate_proposal.html" class="btn-cyber">
+                <button type="button" id="generateBtn" class="btn-cyber">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     توليد المقترح الذكي بالكامل (50 شريحة)
-                </a>
+                </button>
             </div>
 
             <div class="card">
@@ -429,9 +464,72 @@
     </div>
 
     <script>
-        // تأثير تفاعلي سريع عند الضغط لمحاكاة الأنظمة السحابية المتقدمة
-        document.getElementById('uploadBox').addEventListener('click', function() {
-            alert('تم تشغيل موديول الرفع السحابي الذكي لـ 3D Axis بنجاح!');
+        // المحرك الذكي المدمج للتحكم في الرفع المتعدد الدفعة الواحدة (Batch Uploader)
+        const uploadBox = document.getElementById('uploadBox');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const generateBtn = document.getElementById('generateBtn');
+
+        let selectedFiles = [];
+
+        // تفعيل فتح نافذة الاختيار المتعدد عند الضغط على المربع
+        uploadBox.addEventListener('click', () => fileInput.click());
+
+        // معالجة الصور المختارة عبر التصفح
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        // حركات سحب وإفلات الصور وتوهج المربع نيونياً
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.classList.add('upload-box--over');
+        });
+
+        ['dragleave', 'dragend'].forEach(type => {
+            uploadBox.addEventListener(type, () => {
+                uploadBox.classList.remove('upload-box--over');
+            });
+        });
+
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.classList.remove('upload-box--over');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFiles(e.dataTransfer.files);
+            }
+        });
+
+        // دالة استعراض وتأكيد الصور المجموعة في الباقة الدفعة الواحدة
+        function handleFiles(files) {
+            selectedFiles = Array.from(files);
+            fileList.innerHTML = ''; // تصفية القائمة السابقة
+            
+            selectedFiles.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.classList.add('file-item');
+                const fileSize = (file.size / 1024).toFixed(1);
+                fileItem.innerHTML = `<span>📸 ${file.name}</span> <span>(${fileSize} ك.ب)</span>`;
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // محاكاة معالجة الدفعة عند الضغط على زر توليد المقترح الكبير
+        generateBtn.addEventListener('click', function() {
+            if (selectedFiles.length === 0) {
+                alert('تم رصد موديول الرفع: الرجاء اختيار أو سحب صور الأرض أولاً لمعالجتها!');
+                return;
+            }
+
+            // تجميع الصور في حقيبة FormData جاهزة للإرسال السحابي دفعة واحدة
+            const formData = new FormData();
+            selectedFiles.forEach((file, index) => {
+                formData.append(`land_image_${index}`, file);
+            });
+
+            alert(`نجاح منظومة 3D Axis السحابية!\nتم دمج وتجهيز باقة الرفع الدفعة الواحدة وتحتوي على (${selectedFiles.length}) صور لمعالجتها دفعة واحدة وتوليد الـ 50 شريحة بنجاح!`);
         });
     </script>
 </body>
