@@ -92,7 +92,6 @@
 
         .step.active i {
             color: var(--neon-cyan);
-            animation: pulse 1.5s infinite;
         }
 
         .step i {
@@ -112,10 +111,8 @@
             border-radius: 24px;
             padding: 35px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             backdrop-filter: blur(20px);
-            transform: perspective(1000px) rotateX(2deg);
-            transform-style: preserve-3d;
         }
 
         .card h2 {
@@ -149,12 +146,6 @@
             color: #fff;
             outline: none;
             font-size: 14px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
         .upload-box {
@@ -164,15 +155,12 @@
             padding: 40px;
             text-align: center;
             cursor: pointer;
-            box-shadow: inset 0 0 20px rgba(0,242,254,0.05);
             transition: all 0.3s ease;
         }
 
         .upload-box:hover {
             border-color: var(--neon-cyan);
             background: rgba(0, 242, 254, 0.08);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-            transform: scale(1.01);
         }
 
         .upload-box i {
@@ -184,12 +172,6 @@
 
         .upload-box__input {
             display: none;
-        }
-
-        .upload-box--over {
-            border-style: solid;
-            background-color: rgba(0, 242, 254, 0.15);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
         }
 
         .file-list {
@@ -207,9 +189,6 @@
             margin: 5px 0;
             padding: 10px;
             border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .btn-cyber {
@@ -227,18 +206,8 @@
             font-weight: 900;
             cursor: pointer;
             box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
         }
 
-        .btn-cyber:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 0 45px rgba(0, 242, 254, 0.8);
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-        }
-
-        /* تعديل شاشة المعاينة لتستوعب العرض التفاعلي */
         .preview-screen-3d {
             background: radial-gradient(circle at center, #112240 0%, #020c1b 100%);
             border-radius: 16px;
@@ -249,7 +218,6 @@
             align-items: center;
             justify-content: center;
             border: 2px solid rgba(255, 255, 255, 0.05);
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
         }
@@ -263,12 +231,8 @@
         .building-mini {
             font-size: 45px;
             color: rgba(0, 242, 254, 0.6);
-            animation: float 3s ease-in-out infinite;
             text-shadow: 0 0 20px rgba(0,242,254,0.8);
         }
-
-        .building-mini:nth-child(2) { animation-delay: 0.7s; color: rgba(255, 255, 255, 0.8); }
-        .building-mini:nth-child(3) { animation-delay: 1.4s; color: rgba(2, 132, 199, 0.7); }
 
         .screen-info-text {
             text-align: center;
@@ -282,7 +246,6 @@
             background: rgba(0,0,0,0.3);
         }
 
-        /* تنسيقات مشغل الشرائح الحي الجديد */
         .live-slider-container {
             width: 100%;
             height: 100%;
@@ -294,13 +257,14 @@
 
         .slide-frame {
             width: 100%;
-            height: 220px;
+            height: 250px;
             border-radius: 10px;
             border: 2px solid var(--neon-cyan);
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
+            background-color: rgba(0,0,0,0.6);
             position: relative;
-            box-shadow: 0 0 20px rgba(0,242,254,0.3);
         }
 
         .slide-overlay-info {
@@ -308,14 +272,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.75);
-            padding: 10px;
-            font-size: 13px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px;
+            font-size: 14px;
             color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green);
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid rgba(0, 242, 254, 0.4);
         }
 
         .slider-controls {
@@ -323,54 +285,17 @@
             gap: 20px;
             margin-top: 15px;
             width: 100%;
-            justify-content: cubic-bezier();
+            justify-content: center;
         }
 
         .control-btn {
             background: rgba(0, 242, 254, 0.1);
             border: 1px solid var(--neon-cyan);
             color: #fff;
-            padding: 8px 15px;
+            padding: 8px 20px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.2s;
-        }
-
-        .control-btn:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .action-buttons-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .btn-neon-outline {
-            background: transparent;
-            color: #fff;
-            border: 2px solid var(--neon-cyan);
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 15px;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-neon-outline:hover {
-            background: rgba(0, 242, 254, 0.1);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-            transform: translateY(-2px);
         }
 
         .btn-glow-green {
@@ -385,48 +310,12 @@
             border-radius: 14px;
             font-size: 16px;
             font-weight: 900;
-            text-decoration: none;
+            margin-top: 25px;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 0 25px rgba(0, 255, 135, 0.3);
-            margin-bottom: 20px;
         }
 
-        .btn-glow-green:hover {
-            box-shadow: 0 0 40px rgba(0, 255, 135, 0.7);
-            transform: translateY(-2px);
-        }
-
-        .btn-glow-red {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(90deg, #f00c54, #ff6b6b);
-            color: #fff;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 900;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(240, 12, 84, 0.3);
-        }
-
-        .btn-glow-red:hover {
-            box-shadow: 0 0 40px rgba(240, 12, 84, 0.7);
-            transform: translateY(-2px);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-        }
-
-        /* واجهة التحميل المضافة */
         .loading-overlay {
             display: none;
             position: absolute;
@@ -438,6 +327,7 @@
             justify-content: center;
             color: var(--neon-cyan);
         }
+        
         .spinner {
             width: 50px; height: 50px;
             border: 5px solid rgba(0, 242, 254, 0.2);
@@ -447,6 +337,34 @@
             margin-bottom: 15px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* حاوية الطباعة المحلية النظيفة والخفيفة */
+        #pdfExportContainer {
+            display: none;
+        }
+
+        @media print {
+            body * { visibility: hidden; }
+            #pdfExportContainer, #pdfExportContainer * { visibility: visible; }
+            #pdfExportContainer {
+                display: block !important;
+                position: absolute;
+                left: 0; top: 0; width: 100%;
+                background: #fff !important;
+                color: #000 !important;
+                padding: 20px;
+                direction: rtl;
+            }
+            .pdf-page {
+                border: 2px solid #000;
+                padding: 20px;
+                margin-bottom: 30px;
+                page-break-after: always;
+                background: #fff !important;
+                color: #000 !important;
+            }
+            .pdf-img { max-width: 100%; height: auto; display: block; margin: 15px auto; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body>
@@ -456,7 +374,7 @@
             <h1>3D AXIS <span>نظام الأتمتة والذكاء الاصطناعي العقاري</span></h1>
         </div>
         <div>
-            <i class="fa-solid fa-atom" style="font-size: 22px; color: var(--neon-cyan); animation: float 2s infinite;"></i>
+            <i class="fa-solid fa-atom" style="font-size: 22px; color: var(--neon-cyan);"></i>
             <span style="margin-right: 10px; font-weight: bold;">مرحباً، فريق سحر العقاري</span>
         </div>
     </header>
@@ -466,7 +384,7 @@
         <div class="steps-bar" id="stepsBar">
             <div class="step active" id="step1"><i class="fa-solid fa-satellite-dish"></i>1. إدخال بيانات الأرض والمبنى</div>
             <div class="step" id="step2"><i class="fa-solid fa-brain"></i>2. توليد ومعاينة العرض (50 سلايد)</div>
-            <div class="step" id="step3"><i class="fa-solid fa-download"></i>3. تحميل ملف PowerPoint / PDF</div>
+            <div class="step" id="step3"><i class="fa-solid fa-download"></i>3. تحميل التقرير العقاري PDF</div>
         </div>
 
         <div class="dashboard-grid">
@@ -480,10 +398,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label>صورة الأرض الحالية (المستهدفة بالتحليل - يمكنك اختيار عدة صور معاً)</label>
+                    <label>صورة الأرض الحالية (يمكنك اختيار عدة صور معاً)</label>
                     <div class="upload-box" id="uploadBox">
                         <i class="fa-solid fa-qrcode"></i>
-                        <p style="color: #fff; font-weight: bold;" id="uploadPrompt">اسحب وأفلت صور الأرض هنا أو اضغط للتصفح السحابي المتعدد</p>
+                        <p style="color: #fff; font-weight: bold;">اضغط هنا لاختيار صور مشروعك العقاري</p>
                         <input type="file" id="fileInput" class="upload-box__input" multiple accept="image/*">
                     </div>
                     <div id="fileList" class="file-list"></div>
@@ -491,7 +409,7 @@
 
                 <div class="form-group">
                     <label>وصف المبنى والمواصفات المطلوبة بالتفصيل</label>
-                    <textarea id="projectDesc" rows="4" placeholder="مثال: تصميم مودرن بواجهة زجاجية، 12 طابق، محلات تجارية بالطابق الأرضي مع مواقف ذكية للسيارات..."></textarea>
+                    <textarea id="projectDesc" rows="4" placeholder="مثال: تصميم مودرن بواجهة زجاجية، 12 طابق، محلات تجارية بالطابق الأرضي..."></textarea>
                 </div>
 
                 <button type="button" id="generateBtn" class="btn-cyber">
@@ -506,18 +424,16 @@
                 <div class="preview-screen-3d" id="previewScreen">
                     <div class="loading-overlay" id="loadingOverlay">
                         <div class="spinner"></div>
-                        <p style="font-weight: bold; text-shadow: var(--text-glow);">خوارزميات 3D Axis تقوم بتحليل الصور وتوليد الـ 50 شريحة...</p>
+                        <p style="font-weight: bold;" id="loadingText">جاري توزيع ومعالجة الصور حلياً وبناء الملف...</p>
                     </div>
 
-                    <div id="defaultPreview" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <div id="defaultPreview" style="text-align: center;">
                         <div class="hologram-container">
                             <i class="fa-solid fa-building building-mini"></i>
                             <i class="fa-solid fa-city building-mini"></i>
-                            <i class="fa-solid fa-hotel building-mini"></i>
                         </div>
                         <div class="screen-info-text">
-                            <span style="color: var(--neon-cyan); font-weight: bold; display:block; margin-bottom: 5px;">[ محاكي الهولوجرام العقاري ]</span>
-                            سيظهر التصميم المقترح للمبنى ومحتوى السلايدات بشكل مجسم هنا بعد بدء المعالجة الذكية للبيانات.
+                            سيظهر التصميم المقترح للمبنى ومحتوى السلايدات هنا بعد الضغط على زر التوليد.
                         </div>
                     </div>
 
@@ -535,34 +451,23 @@
                     </div>
                 </div>
 
-                <div class="action-buttons-row">
-                    <a href="modules/edit_text.html" class="btn-neon-outline">
-                        <i class="fa-solid fa-square-pen"></i> تعديل نصوص السلايد
-                    </a>
-                    <a href="modules/regenerate_image.html" class="btn-neon-outline">
-                        <i class="fa-solid fa-rotate"></i> إعادة توليد الصورة
-                    </a>
-                </div>
-
-                <a href="modules/export_powerpoint.html" class="btn-glow-green">
-                    <i class="fa-solid fa-file-powerpoint"></i> تحميل وتصدير كملف PowerPoint (.pptx)
-                </a>
-                
-                <a href="modules/export_pdf.html" class="btn-glow-red">
-                    <i class="fa-solid fa-file-pdf"></i> تحميل وتصدير كملف PDF فوري
-                </a>
+                <button type="button" id="exportPdfBtn" class="btn-glow-green" style="display: none;">
+                    <i class="fa-solid fa-file-pdf"></i> تصدير وتحميل العرض كملف PDF وحفظه في مجلدك
+                </button>
             </div>
 
         </div>
     </div>
+
+    <div id="pdfExportContainer"></div>
 
     <script>
         const uploadBox = document.getElementById('uploadBox');
         const fileInput = document.getElementById('fileInput');
         const fileList = document.getElementById('fileList');
         const generateBtn = document.getElementById('generateBtn');
+        const exportPdfBtn = document.getElementById('exportPdfBtn');
         
-        const previewScreen = document.getElementById('previewScreen');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const defaultPreview = document.getElementById('defaultPreview');
         const liveSlider = document.getElementById('liveSlider');
@@ -580,137 +485,110 @@
         let currentSlideIndex = 0;
 
         uploadBox.addEventListener('click', () => fileInput.click());
-
-        fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-
-        uploadBox.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadBox.classList.add('upload-box--over');
-        });
-
-        ['dragleave', 'dragend'].forEach(type => {
-            uploadBox.addEventListener(type, () => {
-                uploadBox.classList.remove('upload-box--over');
-            });
-        });
-
-        uploadBox.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadBox.classList.remove('upload-box--over');
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFiles(e.dataTransfer.files);
-            }
-        });
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
         function handleFiles(files) {
             selectedFiles = Array.from(files);
             fileList.innerHTML = ''; 
-            
             selectedFiles.forEach(file => {
                 const fileItem = document.createElement('div');
                 fileItem.classList.add('file-item');
-                const fileSize = (file.size / 1024).toFixed(1);
-                fileItem.innerHTML = `<span>📸 ${file.name}</span> <span>(${fileSize} ك.ب)</span>`;
+                fileItem.innerHTML = `<span>📸 ${file.name} (جاهزة حلياً)</span>`;
                 fileList.appendChild(fileItem);
             });
         }
 
-        // المحرك التفاعلي عند الضغط على زر التوليد
         generateBtn.addEventListener('click', function() {
             if (selectedFiles.length === 0) {
-                alert('الرجاء اختيار أو سحب صور الأرض أولاً لمعالجتها وتوليد المقترح!');
+                alert('الرجاء اختيار صور الأرض أولاً!');
                 return;
             }
 
-            // 1. إظهار شاشة التحميل الذكية لإعطاء هيبة تقنية للمشروع
             loadingOverlay.style.display = 'flex';
             
+            // مؤقت ثابت ومحلي تماماً (ثانيتين فقط) ليختفي الدوار دون انتظار أي سيرفر خارجي
             setTimeout(() => {
-                // 2. إخفاء التحميل والواجهة الافتراضية وتفعيل خطوة العرض
                 loadingOverlay.style.display = 'none';
                 defaultPreview.style.display = 'none';
                 liveSlider.style.display = 'flex';
+                exportPdfBtn.style.display = 'flex'; 
                 step2.classList.add('active');
                 step3.classList.add('active');
 
-                // 获取輸入 المقترحات تخصيص العرض
                 const projName = document.getElementById('projectName').value || "المشروع العقاري المقترح";
+                const projDesc = document.getElementById('projectDesc').value || "تحليل إنشائي واستثماري مستقبلي متكامل.";
 
-                // 3. توليد مصفوفة ذكية مكونة من 50 شريحة بشكل آلي وتوزيع الصور المرفوعة عليها
                 generatedSlides = [];
-                const totalSlides = 50;
+                const pdfExportContainer = document.getElementById('pdfExportContainer');
+                pdfExportContainer.innerHTML = ''; 
 
-                // عناوين افتراضية لمحاكاة عرض الـ 50 شريحة الاحترافي لتبهر العميل
                 const concepts = [
-                    "تحليل الموقع الجغرافي والأرض المستهدفة",
-                    "دراسة الجدوى المبدئية للمشروع السكني والتجاري",
-                    "المخطط الهيكلي وتوزيع المساحات الذكية",
-                    "الواجهة الزجاجية المستقبلية ونظام الإضاءة الذاتي",
-                    "تصميم المداخل والممرات الفاخرة للبرج",
-                    "توزيع طوابق المول التجاري والمحلات",
-                    "منظومة المواقف الذكية وتقنيات الأتمتة",
-                    "الرؤية الاستثمارية والعوائد المتوقعة للمستأجرين"
+                    "تحليل الموقع الجغرافي والأرض المستهدفة بدقة",
+                    "دراسة الجدوى المبدئية والإنشائية للمبنى السكني والتجاري",
+                    "المخطط الهيكلي وتوزيع المساحات الذكية لتأجير المحلات",
+                    "الواجهة الزجاجية المستقبلية ونظام الإضاءة الذاتي المستدام",
+                    "تصميم المدخل الفاخر والممرات الذكية للبرج",
+                    "توزيع طوابق المول التجاري والمحلات الاستثمارية",
+                    "منظومة المواقف الذكية وتقنيات الأتمتة المدمجة",
+                    "الرؤية الاستثمارية والعوائد المتوقعة للمستأجرين الجدد"
                 ];
 
-                for (let i = 1; i <= totalSlides; i++) {
-                    // اختيار صورة من المرفوعات بالتناوب لمنع حدوث تكرار ممل
+                // توليد باقة الـ 50 شريحة محلياً بناءً على أي كمية صور مرفوعة
+                for (let i = 1; i <= 50; i++) {
                     const fileIndex = (i - 1) % selectedFiles.length;
                     const file = selectedFiles[fileIndex];
-                    
-                    // استخدام ميزة الروابط المؤقتة الخفيفة والسريعة جداً لبناء المعاينة الفورية
                     const blobUrl = URL.createObjectURL(file);
-                    
-                    // توليد عنوان ذكي لكل شريحة من الـ 50 شريحة
                     const conceptText = concepts[(i - 1) % concepts.length];
 
                     generatedSlides.push({
                         id: i,
-                        title: `شريحة ${i}: ${projName} - ${conceptText}`,
+                        title: `شريحة ${i}: ${projName}`,
+                        subtitle: conceptText,
                         image: blobUrl
                     });
+
+                    // حقن الصفحات في حاوية الطباعة المحلية النظيفة لملف الـ PDF
+                    const pageEl = document.createElement('div');
+                    pageEl.classList.add('pdf-page');
+                    pageEl.innerHTML = `
+                        <h2 style="color:#0284c7; font-size:22px; margin-bottom:10px;">شريحة ${i}: ${projName}</h2>
+                        <h3 style="color:#555; margin-bottom:15px;">${conceptText}</h3>
+                        <img src="${blobUrl}" class="pdf-img" />
+                        <p style="margin-top:15px; font-size:14px; text-align:center;">${projDesc}</p>
+                        <hr style="margin-top:20px; border:1px dashed #ccc;">
+                        <p style="font-size:11px; color:#999; text-align:left;">منظومة 3D Axis الذكية - صادر لفريق سحر العقاري</p>
+                    `;
+                    pdfExportContainer.appendChild(pageEl);
                 }
 
-                // 4. تشغيل الشريحة الأولى في المعاينة
                 currentSlideIndex = 0;
                 updateSliderView();
-
-                alert(`🎯 تم بنجاح! تم استخدام منظومة 3D Axis لمعالجة الصور وتوليد باقة العرض الكاملة المكونة من (50 شريحة) وجاهزة للمعاينة الفورية الآن.`);
-            }, 2000); // محاكاة المعالجة لمدة ثانيتين
+                
+                alert("🎯 تم توليد الـ 50 شريحة محلياً بنجاح! اختبر المعاينة واضغط على زر التنزيل الأخضر بالأسفل.");
+            }, 2000);
         });
 
-        // دالة تحديث الشريحة النشطة في المعاينة
         function updateSliderView() {
             if (generatedSlides.length === 0) return;
             const currentSlide = generatedSlides[currentSlideIndex];
-            
-            // تحديث الخلفية بالصورة وعنوان السلايد ورقم العداد
             slideFrame.style.backgroundImage = `url('${currentSlide.image}')`;
-            slideTitle.innerText = currentSlide.title;
+            slideTitle.innerText = `${currentSlide.title} - ${currentSlide.subtitle}`;
             slideCounter.innerText = `${currentSlide.id} / 50`;
         }
 
-        // أزرار التحكم في التنقل بين الـ 50 شريحة
         nextBtn.addEventListener('click', () => {
-            if (currentSlideIndex < generatedSlides.length - 1) {
-                currentSlideIndex++;
-                updateSliderView();
-            } else {
-                currentSlideIndex = 0; // العودة للأول عند النهاية
-                updateSliderView();
-            }
+            currentSlideIndex = (currentSlideIndex + 1) % generatedSlides.length;
+            updateSliderView();
         });
 
         prevBtn.addEventListener('click', () => {
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
-                updateSliderView();
-            } else {
-                currentSlideIndex = generatedSlides.length - 1; // الذهاب للأخير عند البداية
-                updateSliderView();
-            }
+            currentSlideIndex = (currentSlideIndex - 1 + generatedSlides.length) % generatedSlides.length;
+            updateSliderView();
+        });
+
+        // تشغيل نظام التنزيل وحفظ الـ PDF المحلي الصافي والمستقل لمتصفح جهازك
+        exportPdfBtn.addEventListener('click', function() {
+            window.print();
         });
     </script>
 </body>
